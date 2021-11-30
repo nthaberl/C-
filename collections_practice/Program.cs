@@ -35,12 +35,15 @@ namespace collections_practice
             Console.WriteLine(flavors.Count);
 
             //Create a dictionary that will store both string keys as well as string values
-            Dictionary<string,string> user = new Dictionary<string,string>();
+            Dictionary<string,string> iceCream = new Dictionary<string,string>();
 
-            foreach (KeyValuePair<string, string> entry in user)
-            {
-                Console.WriteLine("The name is:" + entry.Key + "Their ice cream is:" + entry.Value);
-            }
+            foreach (var name in names)
+                iceCream.Add(name, null);
+                Random rand = new Random();
+                foreach(var name in names)
+                iceCream[name] = (flavors[rand.Next(flavors.Count)]);
+                foreach(var entry in iceCream)
+                Console.WriteLine($"Their name is:" + entry.Key + " and they like:" + entry.Value);
         }
     }
 }
