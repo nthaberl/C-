@@ -47,8 +47,5 @@ namespace multiplication_table
             }
             Console.WriteLine(sb);
         }
-
-        //Solution
-
     }
 }
