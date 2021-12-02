@@ -66,20 +66,38 @@ constructor() {
      * @param {any} data The data to be added to the new node.
      * @returns {SinglyLinkedList} This list.
      */
-    insertAtBack(data) { 
-        if (this.isEmpty()){
-            this.head = new Node(data);
-        }
-        else{
-            var runner = this.head
-            while (runner.next !== null){
-                runner = runner.next
-            }
-            runner.next = new Node(data)
-        }
-        return this
-}
+//     insertAtBack(data) { 
+//         if (this.isEmpty()){
+//             this.head = new Node(data);
+//         }
+//         else{
+//             var runner = this.head
+//             while (runner.next !== null){
+//                 runner = runner.next
+//             }
+//             runner.next = new Node(data)
+//         }
+//         return this
+// }
 
+
+insertAtBack(data){
+    let node = new Node(data);
+    let current;
+
+    //if empty make head
+    if(!this.head){
+        this.head = node;
+    }
+    else{
+        current = this.head;
+        while (current.next){
+            current = current.next;
+        }
+        current.next = node;
+    }
+
+}
 
     /**
      * Calls insertAtBack on each item of the given array.
@@ -136,11 +154,57 @@ constructor() {
     //more clearcut approach
     insertAtFront(data) {
         var newHead = new Node(data);
-        newHead.next=this.head;
+        newHead.next = this.head;
         this.head = newHead;
         return this;
     }
 
+    //Insert value at an index
+    insertAtIndex(data, index){
+        // if (index > 0){
+        //     return;
+        // }
+
+        //if first index
+        // if (index === 0){
+        //     this.head = new Node (data, this.head);
+        //     return;
+        // }
+
+        //create new node
+        const node = new Node (data);
+        let current, previous;
+
+        //set current to first
+        current = this.head;
+        let count = 0;
+
+        while (count < index) {
+            previous = current; //node before index we're inserting
+            count ++;
+            current = current.next; //node after index
+        }
+
+        node.next = current;
+        previous.next = node;
+    }
+
+
+    //Get data at an index
+    getAt(index){
+        let current = this.head;
+        let count = 0;
+
+        while (current){
+            if (count === index){
+                console.log(current.data);
+            }
+            count ++;
+            current = current.next;
+        }
+
+        return null;
+    }
 
     /**
     * Removes the first node of this list.
@@ -210,16 +274,94 @@ average() {
      * - Space: O(?).
      * @returns {any} The data from the node that was removed.
      */
-removeBack() { 
-    if (this.isEmpty() || this.head.next == null){
-        return null;
-    }
-    runner = this.head;
-    while (runner.next != null){
-        Node.data = Node.data.next;
-    }
+// removeBack() { 
+//     if (this.isEmpty() || this.head.next == null){
+//         return null;
+//     }
+//     runner = this.head;
+//     while (runner.next != null){
+//         Node.data = Node.data.next;
+//     }
 
-    return head
+//     return head
+// }
+
+removeBack() {
+    /**
+     * Edge Cases:
+     *  - What if the list is empty?
+     *  - What if the list only contains one element?
+     */
+    if (this.isEmpty()) {
+        // well then, there's nothing to remove, so return null
+        return null;
+    } else if (this.head.next == null) {
+        /**
+         * If the list only contains 1 node, we just want to set the head to null,
+         * and return the data in what we just chopped off. So first, let's store that 
+         * node in a variable
+         */
+        const removed = this.head;
+        // Then, set the head to null
+        this.head = null;
+        // And return the removed node's data
+        return removed.data;
+    } else {
+        // If neither edge case was met, we need to start our runner at the head
+        let runner = this.head;
+        /**
+         * How can we make our runner stop at the second to last node? Well, we have 2 
+         * main options:
+         *  1. Continue to move the runner as long as the runner's next node has a next node
+         *  2. Make a second runner that'll lag one behind ur main runner, and stop once runner
+         *    is at the last node
+         * 
+         * Because I'll be needing to hold onto the last node's value for our return statement,
+         * I'll use option two
+         */
+        let walker = null; // Starting this at null because there's nothing before the head of the list
+
+        while (runner.next) {
+            walker = runner; // Set walker to be the node runner is referencing before moving runner forward
+            runner = runner.next;
+        }
+
+        /**
+         * Once we've broken out of the while loop, it means that runner is
+         * situated at the last node, and walker is at the second to last.
+         * 
+         * So we'll remove walker's reference to runner (set .next to null)
+         * and return runner's data
+        */
+        walker.next = null;
+        return runner.data;
+    }
+}
+
+
+removeAt(index){
+    let current = this.head;
+    let previous;
+    let count = 0;
+
+    //remove if only head
+    if (index === 0){
+        this.removeHead()
+    }
+    else {
+        while (count < index){
+            count ++;
+            previous = current;
+            current = current.next;
+        }
+
+        previous.next = current.next;
+    }
+}
+
+
+clearList(){
+    this.head = null;
 }
 
 /**
@@ -257,10 +399,9 @@ contains(val) {
   */
 containsRecursive(val, current = this.head) { 
     if (current == null){
-        console.log("false")
         return false;
     }
-    if (current.data == val){
+    else if (current.data == val){
         return true;
     }
     else{
@@ -288,13 +429,115 @@ printListData() {
   *    max integer as it's data.
   * @returns {?number} The max int or null if none.
   */
-recursiveMax(runner = this.head, maxNode = this.head) { }
+
+recursiveMax(runner = this.head, maxNode = this.head) { 
+        // BASE CASE: runner has reached null
+        if(runner == null) {
+            // EDGE CASE: if runner is null because the list is empty
+            if(maxNode == null) {
+                // return null
+                return null;
+            } else {
+                // otherwise, it reached null because it reached the end, so return maxNode's data
+                return maxNode.data
+            }
+        }
+
+        /**
+         * If we haven't fallen into our base case, then we need to check if the runner's data
+         * is larger than our maxNode's data
+         */
+        if(runner.data > maxNode.data) {
+            // if it is, set maxNode to be the runner
+            maxNode = runner;
+        }
+        /**
+         * RECURSIVE CALL:
+         * We've checked our node's value against our maxNode, so it's on
+         * to the next! Recursively!
+         * 
+         * Dive deeper into our function-ception, where the next call's runner
+         * will be this call's runner's next, and maxNode is whatever maxNode is
+         * at this point
+         */
+        return this.recursiveMax(runner.next, maxNode);
+    }
+
+
+/**
+     * Retrieves the data of the second to last node in this list.
+     * - Time: O(n) linear since the number of iterations is related to how many nodes are in the list
+     * - Space: O(1) constant, because regardless of size..
+     * @returns {any} The data of the second to last node or null if there is no
+     *    second to last node.
+    */
+
+secondToLast(){ 
+    // * Edge Cases:
+    // *  - What if the list is empty?
+    // *  - What if the list only contains one element?
+    // */
+    if (this.isEmpty() || this.head.next == null) {
+        //empty list returns null
+        return null;
+    } 
+    else {
+        // If neither edge case was met, we need to start our runner at the head
+        let runner = this.head;
+        while (runner.next.next) {
+         // Set walker to be the node runner is referencing before moving runner forward
+            runner = runner.next;
+        }
+        // /**
+        // * Once we've broken out of the while loop, it means that runner is
+        // * situated at the second to last node.
+        return runner.data;
+    }
 }
+
+/**
+ * Removes the node that has the matching given val as it's data.
+ * - Time: O(n).
+ * - Space: O(1) constant, size of list has no impact on amount of memory used.
+ * @param {any} val The value to compare to the node's data to find the
+ *    node to be removed.
+ * @returns {boolean} Indicates if a node was removed or not.
+ */
+removeVal(val) { 
+    if (this.head.data == val){
+        this.removeHead();
+        return true;
+    }
+    let runner = this.head;
+    while(runner){
+        if (runner.next.data == val){
+            runner.next == runner.next.next;
+            return true;
+        }
+        else {
+            runner = runner.next
+        }
+    }
+    return false
+}
+
+// EXTRA
+/**
+ * Inserts a new node before a node that has the given value as its data.
+ * - Time: O(?).
+ * - Space: O(?).
+ * @param {any} newVal The value to use for the new node that is being added.
+ * @param {any} targetVal The value to use to find the node that the newVal
+ *    should be inserted in front of.
+ * @returns {boolean} To indicate whether the node was pre-pended or not.
+ */
+prepend(newVal, targetVal) { }
+
 
 
 // const emptyList = new SinglyLinkedList();
 
-const singleNodeList = new SinglyLinkedList().seedFromArr([1]);
+// const singleNodeList = new SinglyLinkedList().seedFromArr([1]);
 // const biNodeList = new SinglyLinkedList().seedFromArr([1, 2]);
 // const firstThreeList = new SinglyLinkedList().seedFromArr([1, 2, 3]);
 // const secondThreeList = new SinglyLinkedList().seedFromArr([4, 5, 6]);
@@ -313,10 +556,18 @@ const singleNodeList = new SinglyLinkedList().seedFromArr([1]);
 // const sortedDupeList = new SinglyLinkedList().seedFromArr([
 // 1, 1, 1, 2, 3, 3, 4, 5, 5,
 // ]);
+}
 
 const linkedList = new SinglyLinkedList();
 linkedList.insertAtFront(100)
 linkedList.insertAtFront(200);
 linkedList.insertAtFront(300);
+linkedList.insertAtBack(400);
+linkedList.insertAtIndex(500, 2);
+// linkedList.clearList();
+// linkedList.removeAt(2);
 
 linkedList.printListData();
+console.log("-----");
+console.log(linkedList.secondToLast());
+// linkedList.getAt(10);
