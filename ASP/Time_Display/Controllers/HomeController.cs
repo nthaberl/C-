@@ -8,8 +8,6 @@ namespace Time_Display.Controllers     //be sure to use your own project's names
         [HttpGet("")]       //type of request
         public ViewResult Index() //ViewResult means we will always render on this route
         {
-            DateTime aDate = DateTime.Now;
-            
             return View();
         }
     }
