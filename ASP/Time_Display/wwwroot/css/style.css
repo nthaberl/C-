@@ -1,0 +1,21 @@
+*{
+    padding: 0px;
+    margin: 0px;
+}
+
+div {
+    width: 500px;
+    padding: 10px;
+    text-align: center;
+}
+
+#card{
+    margin: 20px;
+}
+
+#border{
+    width: 400px;
+    border-width: 1px;
+    border-color: black;
+    border-style: solid;
+}
