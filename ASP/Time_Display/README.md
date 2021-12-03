@@ -1,0 +1,1 @@
+Displays current date and time in an easy to read format
