@@ -522,18 +522,137 @@ removeVal(val) {
 }
 
 // EXTRA
+    /**
+     * Inserts a new node before a node that has the given value as its data.
+     * - Time: O(n) - Linear: worst case scenario is what we use, and worst case
+     *      is that the node to prepend to is the last one or doesn't exist, meaning
+     *      we would check each of the n nodes once.
+     * - Space: O(1) - Constant, because the amount of variables/size of the data structures
+     *      declared does not change based on the size of the list.
+     * @param {any} newVal The value to use for the new node that is being added.
+     * @param {any} targetVal The value to use to find the node that the newVal
+     *    should be inserted in front of.
+     * @returns {boolean} To indicate whether the node was pre-pended or not.
+     */
+
+    prepend(newVal, targetVal) { 
+        // THIS ONE IS JUICY
+
+        // EDGE CASE: targetVal is our first node??
+        if(this.head.data == targetVal) {
+            // Well, prepending to the first node is just adding to the front, right? RIGHT!
+            this.insertAtFront(newVal);
+            return true;
+        }
+
+        /*
+            Ok, back to our scheduled programming.
+            If our SLL looks like THIS:
+            H
+            1 -> 2 -> 4 -> 5 -> 6 -> 
+            And we call prepend(3,4)
+            We need to make THIS:
+            H
+            1 -> 2 -> 4 -> 5 -> 6 -> 
+            Look like THIS:
+            H
+            1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 
+            So, similar to our removeVal, I'll be using a runner, but 
+            checking its .next
+        */
+        let runner = this.head;
+
+        while(runner.next) {
+            // We need to check the next node's data against targetVal
+            if(runner.next.data == targetVal) {
+                // Well golly shucks dang, we found a match! Ok cool, now what?
+                // We need to create our new node (duh)
+                let newNode = new Node(newVal);
+
+                // Assign its .next to the node we want to prepend to (aka runner.next)
+                newNode.next = runner.next;
+
+                /*
+                    But, right now, our list looks something like this:
+                .             3
+                    H         ↓ (don't ask how I got that arrow in there)
+                    1 -> 2 -> 4 -> 5 -> 6 ->
+                .        r
+                    We need that 2 node to point at the 3 node. Oh wait! That's our runner!
+                */
+                runner.next = newNode;
+                /*
+                    And now, our list is:
+                    H
+                    1 -> 2 -> 3 -> 4 -> 5 -> 6 ->
+                */
+                return true;
+            }
+            // And if the next node ISN'T supposed to be prepended to?
+            runner = runner.next;
+        }
+        // Again, making it out of the loop means we never found our prependable node
+        return false;
+    }
+
 /**
- * Inserts a new node before a node that has the given value as its data.
+     * Concatenates the nodes of a given list onto the back of this list.
+     * - Time: O(n+m).
+     * - Space: O(?).
+     * @param {SinglyLinkedList} addList An instance of a different list whose
+     *    whose nodes will be added to the back of this list.
+     * @returns {SinglyLinkedList} This list with the added nodes.
+     */
+concat(addList) { 
+    //dont need to check if addList is empty, because it'll be null, then just add null to the end
+    if(this.head == null){
+        this.head = addList.head;
+    }
+    let runner = this.head;
+    while(runner.next != null){
+        runner = runner.next;
+    }
+    runner.next = addList.head
+    return this;
+
+}
+
+/**
+ * Finds the node with the smallest number as data and moves it to the front
+ * of this list.
  * - Time: O(?).
  * - Space: O(?).
- * @param {any} newVal The value to use for the new node that is being added.
- * @param {any} targetVal The value to use to find the node that the newVal
- *    should be inserted in front of.
- * @returns {boolean} To indicate whether the node was pre-pended or not.
+ * @returns {SinglyLinkedList} This list.
  */
-prepend(newVal, targetVal) { }
+moveMinToFront() { 
+    if (this.head === null){
+        return false
+    }
+    if (this.head.next < this.head){
 
+    }
 
+}
+
+// EXTRA
+/**
+ * Splits this list into two lists where the 2nd list starts with the node
+ * that has the given value.
+ * splitOnVal(5) for the list (1=>3=>5=>2=>4) will change list to (1=>3)
+ * and the return value will be a new list containing (5=>2=>4)
+ * - Time: O(?).
+ * - Space: O(?).
+ * @param {any} val The value in the node that the list should be split on.
+ * @returns {SinglyLinkedList} The split list containing the nodes that are
+ *    no longer in this list.
+ */
+splitOnVal(val) {
+    if (val == this.contains(val)){
+
+    }
+}
+
+}
 
 // const emptyList = new SinglyLinkedList();
 
@@ -556,7 +675,6 @@ prepend(newVal, targetVal) { }
 // const sortedDupeList = new SinglyLinkedList().seedFromArr([
 // 1, 1, 1, 2, 3, 3, 4, 5, 5,
 // ]);
-}
 
 const linkedList = new SinglyLinkedList();
 linkedList.insertAtFront(100)

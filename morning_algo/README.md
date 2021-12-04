@@ -1,1 +1,0 @@
-algorithms solved independantly and with groups

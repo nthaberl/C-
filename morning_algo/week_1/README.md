@@ -1,0 +1,1 @@
+algorithms solved independantly and with groups focusing on Singly Linked Lists
