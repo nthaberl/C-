@@ -1,0 +1,49 @@
+@* if using constructor in HomeController, change all names for inputs to their corresponding parameters. These inputs match the Model in Survey Class *@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.9.3/dist/css/uikit.min.css" />
+        <link rel="stylesheet" href="~/css/style.css"/>
+    <title>Dojo Survey Index</title>
+</head>
+<body>
+    <div id="container">
+        <div class="uk-card uk-card-secondary uk-card-hover uk-card-body uk-light uk-container-xsmall">
+            <h3 class="uk-card-title" id="title">Dojo Survey</h3>
+            <form action="/submit" method="POST" class="uk-form-horizontal">
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="SurveyName">Your Name:</label>
+                    <input name="SurveyName" class="uk-input uk-form-width-medium" type="text">
+                </div>
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="SurveyLocation">Location:</label>
+                    <select name="SurveyLocation" class="uk-select uk-form-width-medium">
+                        <option value="Seattle">Seattle</option>
+                        <option value="Portland">Portland</option>
+                        <option value="San Jose">San Jose</option>
+
+                    </select>
+                </div>
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="SurveyLanguage">Favorite Language:</label>
+                    <select name="SurveyLanguage" class="uk-select uk-form-width-medium">
+                        <option value="C#">C# (obvi)</option>
+                        <option value="Java">Java</option>
+                        <option value="1337">1337</option>
+                    </select>
+                </div>
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="SurveyComments">Comments (optional):</label>
+                    <textarea name="SurveyComments" class="uk-textarea uk-form-width-medium" rows="3"></textarea>
+                </div>
+                <button class="uk-button uk-button-default">Submit</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>
