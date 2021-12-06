@@ -1,0 +1,57 @@
+@* if using constructor in HomeController, change all names for inputs to their corresponding parameters. These inputs match the Model in Survey Class *@
+@model Dojo_Survey_Validation.Models.Survey;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.9.3/dist/css/uikit.min.css" />
+        <link rel="stylesheet" href="~/css/style.css"/>
+    <title>Dojo Survey Index</title>
+</head>
+<body>
+    <div id="container">
+        <div class="uk-card uk-card-secondary uk-card-hover uk-card-body uk-light uk-container-xsmall">
+            <h3 class="uk-card-title" id="title">Dojo Survey</h3>
+            <form asp-action="Results" class="uk-form-horizontal">
+                <div class="uk-margin">
+                    <span asp-validation-for="SurveyName"></span>
+                    <label class="uk-form-label" asp-for="SurveyName"></label>
+                    <input asp-for="SurveyName"  class="uk-input uk-form-width-medium">
+                </div>
+                <div class="uk-margin">
+                    <span asp-validation-for="SurveyLocation"></span>
+                    <label class="uk-form-label" asp-for="SurveyLocation"></label>
+                    <select asp-for="SurveyLocation" class="uk-select uk-form-width-medium">
+                        <option value="Seattle">Seattle</option>
+                        <option value="Portland">Portland</option>
+                        <option value="San Jose">San Jose</option>
+
+                    </select>
+                </div>
+                <div class="uk-margin">
+                    <span asp-validation-for="SurveyLanguage"></span>
+                    <label class="uk-form-label" asp-for="SurveyLanguage"></label>
+                    <select asp-for="SurveyLanguage" class="uk-select uk-form-width-medium">
+                        <option value="C#">C# (obvi)</option>
+                        <option value="Java">Java</option>
+                        <option value="1337">1337</option>
+                    </select>
+                </div>
+                <div class="uk-margin">
+                    <span asp-validation-for="SurveyComments"></span>
+                    <label class="uk-form-label" asp-for="SurveyComments"></label>
+                    <textarea asp-for="SurveyComments" class="uk-textarea uk-form-width-medium" rows="3"></textarea>
+                </div>
+                <button class="uk-button uk-button-default">Submit</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>
+
+
+
+
