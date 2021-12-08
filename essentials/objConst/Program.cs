@@ -8,8 +8,6 @@ namespace objConst
         {
         // Notice the type for the new object reference
         // is the same as the class name
-        Vehicle myVehicle = new Vehicle();
-        Console.WriteLine($"My vehicle is holding {myVehicle.MaxNumPassengers} people");
         Vehicle myVehicle = new Vehicle(7);
         Console.WriteLine($"My vehicle is holding {myVehicle.MaxNumPassengers} people");
         
