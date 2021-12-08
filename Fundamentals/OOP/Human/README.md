@@ -1,0 +1,1 @@
+Pacticing building a class with OOP in C#
