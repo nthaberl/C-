@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Password</title>
+</head>
+<body>
+    <h2>Generate a Passcode!</h2>
+    <h3>Random Passcode #@ViewBag.SessionCount</h3>
+    <textarea cols="15" rows="1">@ViewBag.Passcode</textarea>
+    <form action="/add_session">
+    <input type="submit"  value="Generate">
+    </form>
+</body>
+</html>
