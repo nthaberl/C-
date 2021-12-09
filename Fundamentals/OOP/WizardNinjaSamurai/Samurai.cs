@@ -18,9 +18,9 @@ namespace WizardNinjaSamurai
             return target.Health;
         }
         public int Meditate(){
-            Health += 200;
-            Console.WriteLine($"{Health}");
-            return Health;
+            this.Health += 200;
+            Console.WriteLine($"{this.Health}");
+            return this.Health;
         }
     }
 }

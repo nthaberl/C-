@@ -18,6 +18,7 @@ namespace WizardNinjaSamurai
             Samurai Pat = new Samurai("Pat");
             Console.WriteLine(Pat.Meditate());
             System.Console.WriteLine(Nat.Health);
+            Console.WriteLine(Pat.Health);
 
         }
     }
