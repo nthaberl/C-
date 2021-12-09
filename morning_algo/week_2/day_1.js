@@ -153,5 +153,96 @@ class LinkedListStack {
         }
         return length;
     }
+
+/**
+     * Retrieves the item at the front of the queue without removing it.
+     * - Time: O(1) - Constant
+     * - Space: O(1) - Constant
+     * @returns {any} The item at the front of the queue
+     */
+front() {
+    // Gotta love ternary operators
+    return this.head ? this.head.data : undefined;
+
+    // The above line of code is just a shorthand for:
+    if (this.head) {
+        return this.head.data;
+    } else {
+        return undefined;
+    }
+
+    //    front() {
+        if (this.isEmpty()){
+            return null
+        }
+        return this.head.data;
+}
+
+/**
+ * Compares this queue to another given queue to see if they are equal.
+ * Avoid indexing the queue items directly via bracket notation, use the
+ * queue methods instead for practice.
+ * Use no extra array or objects.
+ * The queues should be returned to their original order when done.
+ * - Time: O(?).
+ * - Space: O(?).
+ * @param {Queue} q2 The queue to be compared against this queue.
+ * @returns {boolean} Whether all the items of the two queues are equal and
+ *    in the same order.
+ */
+compareQueues(q2) { 
+    let thisLength = this.size();
+    let q2Length = q2.size();
+
+    if (thisLength != q2Length){
+        return false;
+    }
+
+    while (counter < thisLength){
+        let thisData = this.dequeue();
+        let q2Data = q2.dequeue();
+    }
+}
+
+/**
+ * Determines if the queue is a palindrome (same items forward and backwards).
+ * Avoid indexing queue items directly via bracket notation, instead use the
+ * queue methods for practice.
+ * Use only 1 stack as additional storage, no other arrays or objects.
+ * The queue should be returned to its original order when done.
+ * - Time: O(?).
+ * - Space: O(?).
+ * @returns {boolean}
+
+ */
+isPalindrome() {
+    if(this.isEmpty() || this.length == 1){
+        return true
+    }
+    let stackCompare = new LinkedListStack()
+    for(let i = 0; i < this.length; i ++){
+        stackCompare.push(this.front())
+        this.enqueue(this.dequeue())
+    }
+    let bool = true
+    for(let i = 0; i < this.length; i ++){
+        if(this.front() != stackCompare.pop()){
+            bool = false
+        }
+        this.enqueue(this.dequeue())
+    }
+    return bool
+    }
+
+    toArr() {
+        const arr = [];
+        let runner = this.head;
+
+        while (runner) {
+            arr.push(runner.data);
+            runner = runner.next;
+        }
+        return arr;
+    }
 }
 
