@@ -30,3 +30,13 @@ msbuild.wrn
 
 # Visual Studio 2015
 .vs/
+ASP/DojoSurveyModel/appsettings.Development.json
+ASP/DojoSurveyModel/appsettings.json
+ASP/DojoSurveyModel/DojoSurveyModel.csproj
+ASP/DojoSurveyModel/Program.cs
+ASP/DojoSurveyModel/Startup.cs
+ASP/DojoSurveyModel/Controllers/HomeController.cs
+ASP/DojoSurveyModel/Models/Survey.cs
+ASP/DojoSurveyModel/Properties/launchSettings.json
+ASP/DojoSurveyModel/Views/Home/Index.cshtml
+ASP/DojoSurveyModel/Views/Home/Result.cshtml
