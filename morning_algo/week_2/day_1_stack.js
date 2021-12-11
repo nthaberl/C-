@@ -165,23 +165,38 @@ class TwoStackQueue {
 
     /**
      * Adds a new item to the back of the queue.
-     * - Time: O(?).
-     * - Space: O(?).
+     * - Time: O(n).
+     * - Space: O(1).
      * @param {any} item To be added.
      * @returns {number} The new number of items in the queue.
      */
     enqueue(item) { 
-        this.stack1.items.push(item);
+        // Back of the queue? More like bottom of the stack!!
+        // Steps:
+        //  1. Empty stack1 into stack 2
+        //  2. Put the new item into stack 1
+        //  3. Empty stack2 back into stack1
+        while(!this.stack1.isEmpty()) {
+            this.stack2.push(this.stack1.pop());
+        }
+
+        this.stack1.push(item);
+
+        while(!this.stack2.isEmpty()) {
+            this.stack1.push(this.stack2.pop());
+        }
+
         return this.stack1.size();
     }
 
     /**
      * Removes the next item in the line / queue.
-     * - Time: O(?).
-     * - Space: O(?).
+     * - Time: O(1).
+     * - Space: O(1).
      * @returns {any} The removed item.
      */
     dequeue() { 
-        
+        // Front of the queue? More like top of the stack!!
+        return this.stack1.pop();
     }
 }
