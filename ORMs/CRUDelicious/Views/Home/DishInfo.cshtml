@@ -1,0 +1,22 @@
+@model CRUDelicious.Models.Dish;
+@using CRUDelicious.Models;
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>You've Submitted @Model.Name</h1>
+    <h3>It was created by @Model.Chef</h3>
+    <p>It scores @Model.Tastiness on the Tastiness scale at only @Model.Calories calories!</p>
+    <p>Here's a brief description: @Model.Description</p>
+
+    <a href="/delete/@Model.DishId">Delete this recipe</a>
+    <a href="/edit/@Model.DishId">Edit this recipe</a>
+    <a href="/">Back Home</a>
+</body>
+</html>

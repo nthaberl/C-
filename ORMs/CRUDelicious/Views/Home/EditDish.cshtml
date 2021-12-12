@@ -1,0 +1,45 @@
+@model CRUDelicious.Models.Dish;
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@Model.Name</title>
+</head>
+<body>
+    <h1>Edit @Model.Name!</h1>
+    <form asp-action="UpdateDish">
+    <div>
+        <span asp-validation-for="Name"></span>
+        <label asp-for="Name"></label>
+        <input asp-for="Name">
+
+        <span asp-validation-for="Chef"></span>
+        <label asp-for="Chef"></label>
+        <input asp-for="Chef">
+
+        <span asp-validation-for="Tastiness"></span>
+        <label asp-for="Tastiness"></label>
+        <select asp-for="Tastiness">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+
+        <span asp-validation-for="Calories"></span>
+        <label asp-for="Calories"></label>
+        <input asp-for="Calories">
+
+        <span asp-validation-for="Description"></span>
+        <label asp-for="Description"></label>
+        <input asp-for="Description">
+    <button>Edit Dish</button>
+    </form>
+    </div>
+    <a href="/">Back Home</a>
+</body>
+</html>
