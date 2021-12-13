@@ -42,3 +42,10 @@ ASP/DojoSurveyModel/Views/Home/Index.cshtml
 ASP/DojoSurveyModel/Views/Home/Result.cshtml
 ~$wProjectGuide.docx
 CSharpBook2019Refresh.pdf
+ORMs/LoginAndRegPlatform/Controllers/HomeController.cs
+ORMs/LoginAndRegPlatform/Models/MyContext.cs
+ORMs/LoginAndRegPlatform/Models/User.cs
+ORMs/LoginAndRegPlatform/Models/ViewModels.cs
+ORMs/LoginAndRegPlatform/Views/Home/Login.cshtml
+ORMs/LoginAndRegPlatform/Views/Home/Register.cshtml
+ORMs/LoginAndRegPlatform/Views/Home/Success.cshtml
