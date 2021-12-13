@@ -49,3 +49,13 @@ ORMs/LoginAndRegPlatform/Models/ViewModels.cs
 ORMs/LoginAndRegPlatform/Views/Home/Login.cshtml
 ORMs/LoginAndRegPlatform/Views/Home/Register.cshtml
 ORMs/LoginAndRegPlatform/Views/Home/Success.cshtml
+ORMs/CRUDPlatform/Controllers/HomeController.cs
+ORMs/CRUDPlatform/Models/Dish.cs
+ORMs/CRUDPlatform/Models/DishContext.cs
+ORMs/CRUDPlatform/Models/ErrorViewModel.cs
+ORMs/CRUDPlatform/Views/Home/Edit.cshtml
+ORMs/CRUDPlatform/Views/Home/Index.cshtml
+ORMs/CRUDPlatform/Views/Home/New.cshtml
+ORMs/CRUDPlatform/Views/Home/Show.cshtml
+ORMs/CRUDPlatform/Views/Shared/Back.cshtml
+ORMs/CRUDPlatform/Views/Shared/Error.cshtml
