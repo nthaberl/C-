@@ -1,0 +1,67 @@
+@using ChefsAndDishes.Models;
+@model IndexView;
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Chefs</h1>
+    <h1><a href="/dishes">Dishes</a></h1>
+
+    <h2>Check out our roster of Chefs!</h2>
+<table>
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Age
+        </th>
+        <th>
+            # of dishes created
+        </th>
+    </tr>
+    @* @foreach (Chef chef in Model.AllChefs)
+    {
+        DateTime today = DateTime.Today;
+        int age = today.Year - chef.DOB.Year;
+        <tr> 
+            <td>
+                @chef.FirstName @chef.LastName
+            </td>
+            <td>
+                @age
+            </td>
+            <td>
+                @chef.CreatedDishes.Count
+            </td>
+        </tr>
+        }
+         *@
+
+        @foreach (Chef chef in Model.AllChefs)
+        {
+            DateTime today = DateTime.Today;
+            int age = today.Year - chef.DOB.Year;
+            <tr>
+                <td>
+                    @chef.FirstName @chef.LastName
+                </td>
+                <td>
+                    @age
+                </td>
+                <td>
+                    @chef.CreatedDishes.Count
+                </td>
+            </tr>
+        }
+</table>
+
+    <a href="/newchef">Add a Chef!</a>
+</body>
+</html>
