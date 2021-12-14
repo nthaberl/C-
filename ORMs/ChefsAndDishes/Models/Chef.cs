@@ -31,7 +31,7 @@ namespace ChefsAndDishes.Models
         public DateTime UpdatedAt {get; set;} = DateTime.Now;
 
         //navigation property for the dishes made by this chef
-        // [NotMapped]
+        // [NotMapped] if not mapped will throw off lambda expression
         public List<Dish> CreatedDishes { get; set; }
 
 
