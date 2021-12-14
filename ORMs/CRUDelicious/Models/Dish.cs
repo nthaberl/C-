@@ -16,7 +16,7 @@ namespace CRUDelicious.Models
         [Required(ErrorMessage = "Please provide a name")]
         public string Chef { get; set; }
 
-        [Display (Name= "Rate dish's tastiness! ")]
+        [Display (Name = "Rate dish's tastiness! ")]
         [Required]
         public int Tastiness { get; set; }
 
