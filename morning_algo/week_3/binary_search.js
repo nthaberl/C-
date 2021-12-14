@@ -68,15 +68,29 @@ class BinarySearchTree {
      *    the tree is being traversed.
      * @returns {number} The smallest integer from this tree.
      */
+
     min(current = this.root) { 
-        if (current == null) {
+        // Edge Case: Empty tree
+        if(!current) {
             return null;
-        } 
-        while(current.left!=null){
-            current=current.left;
         }
+        // Finding the smallest is just going to the left as much as you can
+        while(current.left) {
+            current = current.left;
+        }
+
         return current.data;
+        
     }
+    // min(current = this.root) { 
+    //     if (current == null) {
+    //         return null;
+    //     } 
+    //     while(current.left!=null){
+    //         current=current.left;
+    //     }
+    //     return current.data;
+    // }
 
     /**
      * Retrieves the largest integer data from this tree.
@@ -86,14 +100,27 @@ class BinarySearchTree {
      *    the tree is being traversed.
      * @returns {number} The largest integer from this tree.
      */
+    // max(current = this.root) { 
+    //     if (current == null) {
+    //         return null;
+    //     }
+    //     while(current.right!=null) {
+    //         current = current.right;
+    //     }
+    //     return current.data
+    // }
+
     max(current = this.root) { 
-        if (current == null) {
+        // This is going to be identical to min, but to the right
+        if(!current) {
             return null;
         }
-        while(current.right!=null) {
+
+        while(current.right) {
             current = current.right;
         }
-        return current.data
+
+        return current.data;
     }
 
     // Bonus Challenges
@@ -105,15 +132,27 @@ class BinarySearchTree {
      *    the tree is being traversed.
      * @returns {number} The smallest integer from this tree.
      */
+    // minRecursive(current = this.root) { 
+    //     if (current.data == null){
+    //         return null;
+    //     }
+    //     if(current.left!=null){
+    //         return this.minRecursive(current = current.left);
+    //     }
+    //     return current.data;
+    // }
+
+
     minRecursive(current = this.root) { 
-        if (current.data == null){
+        if(!current) {
             return null;
+        } else if(!current.left) {
+            return current.data;
+        } else {
+            return this.minRecursive(current.left);
         }
-        if(current.left!=null){
-            return this.minRecursive(current = current.left);
-        }
-        return current.data;
     }
+
 
     /**
      * Retrieves the largest integer data from this tree.
@@ -123,13 +162,89 @@ class BinarySearchTree {
      *    the tree is being traversed.
      * @returns {number} The largest integer from this tree.
      */
+    // maxRecursive(current = this.root) { 
+    //     if(current.data==null) {
+    //         return null;
+    //     } else if (current.right!=null) {
+    //         return this.maxRecursive(current = current.right);
+    //     }
+    //     return current.data;
+    // }
+
     maxRecursive(current = this.root) { 
-        if(current.data==null) {
+        if(!current) {
             return null;
-        } else if (current.right!=null) {
-            return this.maxRecursive(current = current.right);
+        } else if(!current.right) {
+            return current.data;
+        } else {
+            return this.maxRecursive(current.right);
         }
-        return current.data;
+    }
+
+
+    /**
+     * Determines if this tree contains the given searchVal.
+     * - Time: O(?).
+     * - Space: O(?).
+     * @param {number} searchVal The number to search for in the node's data.
+     * @returns {boolean} Indicates if the searchVal was found.
+     */
+    contains(searchVal) { 
+        let current = this.root;
+        while (current)
+        {
+            if (searchVal === current.data)
+            {
+                return true;
+            }
+            if (searchVal < current.data){
+                current = current.left;
+            } else {
+                current = current.right;
+            }
+        }
+        return false;
+    }
+
+    /**
+       * Determines if this tree contains the given searchVal.
+       * - Time: O(?).
+       * - Space: O(?).
+       * @param {number} searchVal The number to search for in the node's data.
+       * @returns {boolean} Indicates if the searchVal was found.
+       */
+    containsRecursive(searchVal, current = this.root) { 
+        if (current === null){
+            return false;
+        }
+        if (current.data === searchVal){
+            return true;
+        }
+        if (searchVal < current.data && current.left){
+            return this.containsRecursive(searchVal, current.left);
+        }
+        else if (searchVal > current.data && current.right){
+            return this.containsRecursive(searchVal, current.right)
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    /**
+       * Calculates the range (max - min) from the given startNode.
+       * - Time: O(hL + hR). - linear with relation to the left and right heights
+       * - Space: O(1) - constant
+       * @param {Node} startNode The node to start from to calculate the range.
+       * @returns {number|null} The range of this tree or a sub tree depending on if the
+       *    startNode is the root or not.
+       */
+    range(startNode = this.root) { 
+        if (startNode === null){
+            return null;
+        }
+        return this.max(startNode) - this.min(startNode);
     }
 }
 
@@ -181,11 +296,18 @@ fullTree.root.right.left.right = new Node(44);
 fullTree.root.right.right.left = new Node(66);
 fullTree.root.right.right.right = new Node(90);
 
-console.log('min:')
-console.log(fullTree.min());
-console.log('max:')
-console.log(fullTree.max());
-console.log('max RECURSIVE:')
-console.log(fullTree.maxRecursive());
-console.log('min RECURSIVE:')
-console.log(fullTree.minRecursive());
+// console.log('min:')
+// console.log(fullTree.min());
+// console.log('max:')
+// console.log(fullTree.max());
+// console.log('max RECURSIVE:')
+// console.log(fullTree.maxRecursive());
+// console.log('min RECURSIVE:')
+// console.log(fullTree.minRecursive());
+console.log(fullTree.containsRecursive(70));
+console.log(fullTree.containsRecursive(27));
+console.log(fullTree.contains(70));
+console.log(fullTree.contains(55));
+console.log(fullTree.containsRecursive(35));
+console.log(fullTree.containsRecursive(55));
+console.log(fullTree.range());
