@@ -1,0 +1,41 @@
+@using ProductsAndCategories.Models;
+@model ProductInfoView;
+@{
+    Product Display = Model.ToRender;
+    Association AddForm = Model.AddForm;
+    List<Category> ToAdd = Model.ToAdd;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@Display.Name</title>
+</head>
+<body>
+
+    <h1>@Display.Name</h1>
+
+    <h4>Categories associated with @Display.Name:</h4>
+    @foreach (Association association in Display.Categories)
+    {
+        <li>@association.Category.Name</li>
+    }
+
+    <form asp-action="UpdateProduct">
+        <h3><label asp-for="AddForm.CategoryId">Available categories to add</label></h3>
+        <select asp-for="AddForm.CategoryId">
+    @foreach (Category category in ToAdd)
+    {
+        <option value="@category.CategoryId">@category.Name</option>
+    }
+    </select>
+    <input type="hidden" asp-for="AddForm.ProductId" value="@Display.ProductId">
+    <button>Add Category</button>
+    </form>
+
+    <a href="/products">Back to all products</a>
+</body>
+</html>

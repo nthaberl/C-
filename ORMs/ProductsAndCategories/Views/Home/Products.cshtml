@@ -1,0 +1,42 @@
+@using ProductsAndCategories.Models;
+@model Product;
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products</title>
+</head>
+<body>
+    <h1><a href="/categories">See all categories</a></h1>
+    <h1>Products</h1>
+
+    <h1>New Product</h1>
+    <form asp-action="NewProduct">
+    <div>
+        <span asp-validation-for="Name"></span>
+        <label asp-for="Name"></label>
+        <input asp-for="Name">
+
+        <span asp-validation-for="Description"></span>
+        <label asp-for="Description"></label>
+        <input asp-for="Description">
+
+        <span asp-validation-for="Price"></span>
+        <label asp-for="Price"></label>
+        <input asp-for="Price">
+    <button>Add Product</button>
+    </form>
+    </div>
+    <h3>List of all products</h3>
+    <ul>
+    @foreach (var product in ViewBag.ListProducts)
+    {
+        <a href="/products/@product.ProductId"><li>@product.Name</li></a>
+    }
+    </ul>
+
+</body>
+</html> 
