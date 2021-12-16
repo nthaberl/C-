@@ -11,9 +11,30 @@ namespace deck_of_Cards
         public Player(string name)
         {
             Name = name;
-            Hand = new List<Card>();
+            // Hand = new List<Card>();
         }
 
-        
+        public Card Draw(Deck card)
+        {
+            Card drawcard = card.deal();
+            Hand.Add(drawcard);
+            Console.WriteLine($"Drew a {drawcard.StringVal} of {drawcard.Suit}");
+            return drawcard;
+        }
+
+        public Card Discard(int index)
+        {
+            if (Hand.Count > index)
+            {
+                Card discarded = Hand[index];
+                Hand.Remove(discarded);
+                Console.WriteLine($"{discarded.StringVal} of {discarded.Suit} was discarded");
+                return discarded;
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }

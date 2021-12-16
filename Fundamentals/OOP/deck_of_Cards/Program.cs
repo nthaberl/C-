@@ -8,7 +8,15 @@ namespace deck_of_Cards
         static void Main(string[] args)
         {
             Deck deck = new Deck();
-            deck.deal();
+            // deck.deal();
+            Player nat = new Player("Nat");
+            deck.Build();
+            nat.Draw(deck);
+            nat.Draw(deck);
+            nat.Draw(deck);
+            nat.Draw(deck);
+            nat.Draw(deck);
+            nat.Discard(2);
         }
     }
 

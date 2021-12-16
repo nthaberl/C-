@@ -29,7 +29,7 @@ namespace deck_of_Cards
         public Card deal()
         {
             Card card = Cards[0];
-            System.Console.WriteLine($"Dealt {card.StringVal} of {card.Suit}");
+            // System.Console.WriteLine($"Dealt {card.StringVal} of {card.Suit}");
             Cards.RemoveAt(0);
             return card;
         }
