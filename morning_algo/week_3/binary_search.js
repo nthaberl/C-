@@ -246,11 +246,101 @@ class BinarySearchTree {
         }
         return this.max(startNode) - this.min(startNode);
     }
+
+
+
+    /**
+     * Inserts a new node with the given newVal in the right place to preserve
+     * the order of this tree.
+     * - Time: O(?).
+     * - Space: O(?).
+     * @param {number} newVal The data to be added to a new node.
+     * @returns {BinarySearchTree} This tree.
+     */
+    insert(newVal) { 
+        if(this.root == null){
+            this.root = new Node(newVal)
+        }
+        else{
+            let runner = this.root;
+            while(runner) {
+                if (runner.left == null && newVal < runner.data){
+                    runner.left = new Node(newVal);
+                    break;
+                } else if (runner.right == null && newVal >= runner.data){
+                    runner.right = new Node(newVal);
+                    break;
+                }
+                if (newVal < runner.data){
+                    runner = runner.left;
+                }else if (
+                    newVal >= runner.data){
+                        runner = runner.right;
+                    }
+                }
+            }
+            return this;
+        }
+
+
+
+
+    /**
+       * Inserts a new node with the given newVal in the right place to preserve
+       * the order of this tree.
+       * - Time: O(?).
+       * - Space: O(?).
+       * @param {number} newVal The data to be added to a new node.
+       * @param {Node} curr The node that is currently accessed from the tree as
+       *    the tree is being traversed.
+       * @returns {BinarySearchTree} This tree.
+    //    */
+    // insertRecursive(newVal, curr = this.root) { 
+    //     if(this.root == null){
+    //         this.root = new Node(newVal);
+    //         return this;
+    //     } else {
+    //         if (curr.left == null && newVal < curr.data){
+    //             curr.left = new Node(newVal);
+    //             return this;
+    //         } else if (curr.right == null && newVal >= curr.data){
+    //             curr.right = new Node(newVal);
+    //             return this;
+    //         }
+    //         if(newVal < curr.data)
+    //         {
+    //             return this.insertRecursive(newVal, curr = curr.left);
+    //         } else if (newVal >= curr.data){
+    //             return this.insertRecursive(newVal, curr = curr.right);
+    //         }
+    //     }
+    // }
+
+    insertRecursive(newVal, curr = this.root) {
+        if(curr == null){
+            this.root = new Node(newVal)
+            return this
+        }
+        if(newVal < curr.data){
+            if(curr.left == null){
+                curr.left = new Node(newVal)
+                return this
+            }
+            return this.insertRecursive(newVal, curr.left)
+        }
+        else{
+            if(curr.right == null){
+                curr.right = new Node(newVal)
+                return this
+            }
+            return this.insertRecursive(newVal, curr.right)
+        }
+    }
 }
 
-const emptyTree = new BinarySearchTree();
-const oneNodeTree = new BinarySearchTree();
-oneNodeTree.root = new Node(10);
+// const emptyTree = new BinarySearchTree();
+// const oneNodeTree = new BinarySearchTree();
+// oneNodeTree.root = new Node(10);
 
 /* twoLevelTree
         root
@@ -258,12 +348,12 @@ oneNodeTree.root = new Node(10);
       /   \
     5     15
 */
-const twoLevelTree = new BinarySearchTree();
-twoLevelTree.root = new Node(10);
-twoLevelTree.root.left = new Node(5);
-twoLevelTree.root.right = new Node(15);
+// const twoLevelTree = new BinarySearchTree();
+// twoLevelTree.root = new Node(10);
+// twoLevelTree.root.left = new Node(5);
+// twoLevelTree.root.right = new Node(15);
 
-twoLevelTree.print();
+// twoLevelTree.print();
 
 /**  fullTree
  *                 root
@@ -276,25 +366,25 @@ twoLevelTree.print();
  *     4   12  18  24  31  44 66  90
  */
 const fullTree = new BinarySearchTree();
-fullTree.root = new Node(25);
+// fullTree.root = new Node(25);
 
 // left sub-tree
-fullTree.root.left = new Node(15);
-fullTree.root.left.left = new Node(10);
-fullTree.root.left.right = new Node(22);
-fullTree.root.left.left.left = new Node(4);
-fullTree.root.left.left.right = new Node(12);
-fullTree.root.left.right.left = new Node(18);
-fullTree.root.left.right.right = new Node(24);
+// fullTree.root.left = new Node(15);
+// fullTree.root.left.left = new Node(10);
+// fullTree.root.left.right = new Node(22);
+// fullTree.root.left.left.left = new Node(4);
+// fullTree.root.left.left.right = new Node(12);
+// fullTree.root.left.right.left = new Node(18);
+// fullTree.root.left.right.right = new Node(24);
 
 // right sub-tree
-fullTree.root.right = new Node(50);
-fullTree.root.right.left = new Node(35);
-fullTree.root.right.right = new Node(70);
-fullTree.root.right.left.left = new Node(31);
-fullTree.root.right.left.right = new Node(44);
-fullTree.root.right.right.left = new Node(66);
-fullTree.root.right.right.right = new Node(90);
+// fullTree.root.right = new Node(50);
+// fullTree.root.right.left = new Node(35);
+// fullTree.root.right.right = new Node(70);
+// fullTree.root.right.left.left = new Node(31);
+// fullTree.root.right.left.right = new Node(44);
+// fullTree.root.right.right.left = new Node(66);
+// fullTree.root.right.right.right = new Node(90);
 
 // console.log('min:')
 // console.log(fullTree.min());
@@ -304,10 +394,39 @@ fullTree.root.right.right.right = new Node(90);
 // console.log(fullTree.maxRecursive());
 // console.log('min RECURSIVE:')
 // console.log(fullTree.minRecursive());
-console.log(fullTree.containsRecursive(70));
-console.log(fullTree.containsRecursive(27));
-console.log(fullTree.contains(70));
-console.log(fullTree.contains(55));
-console.log(fullTree.containsRecursive(35));
-console.log(fullTree.containsRecursive(55));
-console.log(fullTree.range());
+// console.log(fullTree.containsRecursive(70));
+// console.log(fullTree.containsRecursive(27));
+// console.log(fullTree.contains(70));
+// console.log(fullTree.contains(55));
+// console.log(fullTree.containsRecursive(35));
+// console.log(fullTree.containsRecursive(55));
+// console.log(fullTree.range());
+// fullTree
+//     .insert(25)
+//     .insert(15)
+//     .insert(10)
+//     .insert(22)
+//     .insert(4)
+//     .insert(12)
+//     .insert(18)
+//     .insert(24)
+//     .insert(50)
+//     .insert(35)
+//     .insert(70)
+//     .insert(31)
+//     .insert(44)
+//     .insert(66)
+//     .insert(90);
+// fullTree.print();
+
+fullTree
+.insertRecursive(25)
+.insertRecursive(15)
+.insertRecursive(10)
+.insertRecursive(22)
+.insertRecursive(4)
+.insertRecursive(12)
+.insertRecursive(18)
+.insertRecursive(24)
+.insertRecursive(50)
+fullTree.print();
