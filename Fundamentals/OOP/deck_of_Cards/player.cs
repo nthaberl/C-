@@ -28,7 +28,7 @@ namespace deck_of_Cards
             {
                 Card discarded = Hand[index];
                 Hand.Remove(discarded);
-                Console.WriteLine($"{discarded.StringVal} of {discarded.Suit} was discarded");
+                Console.WriteLine($"{discarded.StringVal} of {discarded.Suit} was discarded. There are only {Hand.Count} cards left in hand.");
                 return discarded;
             }
             else
